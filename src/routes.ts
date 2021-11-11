@@ -4,15 +4,16 @@ import { CreateMessageController } from "./controller/CreateMessageController";
 import { GetLastThreeMessagesController } from "./controller/GetLastThreeMessagesController";
 import { ProfileUserController } from "./controller/ProfileUserController";
 import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
+import cors from 'cors'
 
 
 const router = Router();
 
 
-router.post('/authenticate', new AuthenticateUserController().handle)
-router.post('/messages', ensureAuthenticate, new CreateMessageController().handle)
-router.get('/messages/lastthree', new GetLastThreeMessagesController().handle)
-router.get('/profile', ensureAuthenticate ,new ProfileUserController().handle)
+router.post('/authenticate', cors(), new AuthenticateUserController().handle)
+router.post('/messages', cors(), ensureAuthenticate, new CreateMessageController().handle)
+router.get('/messages/lastthree', cors(),new GetLastThreeMessagesController().handle)
+router.get('/profile', cors(), ensureAuthenticate ,new ProfileUserController().handle)
 
 
 export { router }

@@ -4,7 +4,7 @@ import { verify } from "jsonwebtoken";
 
 
 interface IPayload {
-    sub: string
+    sub: string;
 }
 
 export function ensureAuthenticate(request: Request, response: Response, 

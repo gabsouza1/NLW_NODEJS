@@ -4,14 +4,14 @@ import { sign } from 'jsonwebtoken'
 
 
 interface IAccessTokenResponse {
-    access_token: string
+    access_token: string;
 }
 
 interface IUserResponse {
-    avatar_url: string,
-    login: string,
-    id: number,
-    name: string
+    avatar_url: string;
+    login: string;
+    id: number;
+    name: string;
 }
 
 class AuthenticateUserService {
@@ -20,13 +20,14 @@ class AuthenticateUserService {
     const url = "https://github.com/login/oauth/access_token"
 
 
-    const { data: accessTokenResponse } = await axios.post<IAccessTokenResponse>(url, 
+    const { data: accessTokenResponse } = 
+    await axios.post<IAccessTokenResponse> (url, 
         null, 
         {
         params: { 
         client_id: process.env.GITHUB_CLIENT_ID,
         client_secret: process.env.GITHUB_CLIENT_SECRET,
-        code
+        code,
         },
 
         headers: {
@@ -52,10 +53,10 @@ class AuthenticateUserService {
         await prismaClient.user.create({
             data: {
                 github_id: id,
-                login: login,
-                avatar_url: avatar_url,
-                name: name
-            }
+                login,
+                avatar_url,
+                name,
+            },
         })
     }
 
@@ -63,8 +64,8 @@ class AuthenticateUserService {
         user: {
             name: user.name,
             avatar_url: user.avatar_url,
-            id: user.id
-        }
+            id: user.id,
+        },
     },
     process.env.JWT_SECRET,
 
