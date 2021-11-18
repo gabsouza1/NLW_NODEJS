@@ -5,13 +5,17 @@ import { Server, Socket} from 'socket.io';
 import http from 'http'
 import cors from "cors"
 
-const app = express();
 
+const app = express();
+app.use(cors())
 const serverHttp = http.createServer(app)
+app.use(express.json())
+app.use(router)
+
 
 const io = new Server(serverHttp, {
     cors: {
-        origin: "*"
+        origin: '*'
     }
 })
 
@@ -20,9 +24,7 @@ io.on('connection', (socket) => {
 })
 
  
-app.use(express.json())
-app.use(router)
-app.use(cors())
+
 
 
 app.get('/github', (req, res) => {

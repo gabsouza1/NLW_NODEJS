@@ -12,7 +12,7 @@ const router = Router();
 
 router.post('/authenticate', cors(), new AuthenticateUserController().handle)
 router.post('/messages', cors(), ensureAuthenticate, new CreateMessageController().handle)
-router.get('/messages/lastthree', cors(),new GetLastThreeMessagesController().handle)
+router.get('/messages/lastthree',new GetLastThreeMessagesController().handle)
 router.get('/profile', cors(), ensureAuthenticate ,new ProfileUserController().handle)
 
 
